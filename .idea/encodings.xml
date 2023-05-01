@@ -3,6 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/email-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/email-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/fileserver-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/fileserver-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/user-auth-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/user-auth-service/src/main/resources" charset="UTF-8" />
   </component>
