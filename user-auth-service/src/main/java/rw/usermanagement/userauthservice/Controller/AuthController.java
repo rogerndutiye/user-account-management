@@ -2,9 +2,11 @@ package rw.usermanagement.userauthservice.Controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -12,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import rw.usermanagement.userauthservice.Dto.request.CreateUserDTO;
+import rw.usermanagement.userauthservice.Dto.request.EmailDto;
 import rw.usermanagement.userauthservice.Dto.request.RequestLogin;
 import rw.usermanagement.userauthservice.Dto.request.RequestOTPVerification;
 import rw.usermanagement.userauthservice.Dto.response.ApiResponse;
@@ -45,6 +48,9 @@ public class AuthController {
 
     private final RedisTemplate<String, String> redisTemplate;
 
+    @Autowired
+    private  KafkaTemplate<String, EmailDto> kafkaTemplate;
+
     private static final String OTP_PREFIX = "otp:";
     private static final long OTP_EXPIRATION = 300;
 
@@ -69,6 +75,14 @@ public class AuthController {
 
         String otp = GenerateOtp();
         redisTemplate.opsForValue().set(OTP_PREFIX + request.getEmail(), otp, OTP_EXPIRATION, TimeUnit.SECONDS);
+        EmailDto emailTample =new EmailDto();
+        emailTample.setRecipient(request.getEmail());
+        emailTample.setSubject("OTP");
+        emailTample.setBody(otp);
+        kafkaTemplate.send("user-signup-topic", request.getEmail() ,emailTample);
+        //kafkaTemplate.send(emailTample);
+
+
         //sendOtpByEmail(loginRequest.getEmail(), otp);
         return ResponseEntity.ok(new ApiResponse<>(200, "OTP sent successfully"+otp, userService.getUserInfo(request.getEmail()),null));
     }

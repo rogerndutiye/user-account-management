@@ -45,12 +45,12 @@ public class KafkaConfig {
 //        return new DefaultKafkaProducerFactory<>(configs);
 //    }
 
-//    @Bean
-//    public KafkaTemplate<String, Object> kafkaTemplate(ProducerFactory<String, Object> producerFactory) {
-//        KafkaTemplate<String, Object> kafkaTemplate = new KafkaTemplate<>(producerFactory);
-//        kafkaTemplate.setDefaultTopic("user-signup-topic");
-//        return kafkaTemplate;
-//    }
+    @Bean
+    public KafkaTemplate<String, Object> kafkaTemplate(ProducerFactory<String, Object> producerFactory) {
+        KafkaTemplate<String, Object> kafkaTemplate = new KafkaTemplate<>(producerFactory);
+        kafkaTemplate.setDefaultTopic("user-signup-topic");
+        return kafkaTemplate;
+    }
 //    @Bean
 //    public ProducerFactory<String, String> producerFactory() {
 //        Map<String, Object> configProps = new HashMap<>();

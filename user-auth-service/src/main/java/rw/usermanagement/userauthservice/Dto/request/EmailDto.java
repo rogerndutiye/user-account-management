@@ -12,8 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailDTO {
-
+public class EmailDto {
     @NotBlank
     private String subject;
 
@@ -30,6 +29,4 @@ public class EmailDTO {
     private String attachment;
     private String cc;
     private String bcc;
-
-
 }
