@@ -12,11 +12,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 public class CreateUserDTO {
 
-    @NotBlank(message = "First name is mandatory")
-    private String firstName;
 
-    @NotBlank(message = "Last name is mandatory")
-    private String lastName;
 
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Email format is invalid")

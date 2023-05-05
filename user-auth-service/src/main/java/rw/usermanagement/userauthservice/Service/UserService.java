@@ -35,8 +35,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user = userRepository.save(user);
         UserProfile userProfile =new UserProfile();
-        userProfile.setFirstName(dto.getFirstName());
-        userProfile.setLastName(dto.getLastName());
         userProfile.setUser(user);
         userProfileRepository.save(userProfile);
         return Mapper.toDTO(user);
@@ -45,6 +43,16 @@ public class UserService {
     public User findById(Integer id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User id "+id+" NotFound", HttpStatus.NOT_FOUND));
+    }
+
+    public UserDTO getUserInfo(String email) {
+
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new CustomException("email Not found" + email, HttpStatus.NOT_FOUND);
+        }else{
+            return Mapper.toDTO(user);
+        }
     }
 
     public User findByEmail(String email) {

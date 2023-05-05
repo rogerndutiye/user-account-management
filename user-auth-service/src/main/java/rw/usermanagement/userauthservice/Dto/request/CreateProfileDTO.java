@@ -17,6 +17,12 @@ import java.util.Date;
 @NoArgsConstructor
 public class CreateProfileDTO {
 
+    @NotBlank(message = "First name is mandatory")
+    private String firstName;
+
+    @NotBlank(message = "Last name is mandatory")
+    private String lastName;
+
     @NotBlank()
     private String nationality;
 

@@ -20,10 +20,8 @@ public class UserProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
     private String lastName;
 
     @OneToOne(fetch = FetchType.LAZY)

@@ -45,12 +45,13 @@ public class GlobalExceptionHandler {
             String field = error.getField();
             Object value = error.getRejectedValue();
             String msg = error.getDefaultMessage();
-            list.add(String.format("%s Validation failed => Value %s : %s", field, value, msg));
+            //list.add(String.format("%s Validation failed => Value %s : %s", field, value, msg));
+            list.add(String.format("%s : %s", field, msg));
         });
 
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
-        apiResponse.setMessage(ex.getMessage());
+        apiResponse.setMessage("error while submitting");
         apiResponse.setErrors(list);
         return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
     }
@@ -72,7 +73,7 @@ public class GlobalExceptionHandler {
         List<String> errors = Collections.singletonList(ex.getMessage());
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        apiResponse.setMessage(ex.getMessage());
+        apiResponse.setMessage("error while submitting");
         apiResponse.setErrors(errors);
         return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -82,7 +83,7 @@ public class GlobalExceptionHandler {
         List<String> errors = Collections.singletonList(ex.getMessage());
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        apiResponse.setMessage(ex.getMessage());
+        apiResponse.setMessage("error while submitting");
         apiResponse.setErrors(errors);
 
         return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -21,6 +21,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+//@CrossOrigin(origins = "http://127.0.0.1:5173")
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "api/files")
 public class FileController {

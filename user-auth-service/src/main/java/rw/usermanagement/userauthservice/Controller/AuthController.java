@@ -63,30 +63,14 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateAndGetToken(@Valid @RequestBody RequestLogin request) throws Exception {
         log.info("controller auth: login user :: [{}] ::", request.getEmail());
-//        try {
-//            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-//
-//            if (authentication.isAuthenticated()) {
-//                UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
-//                String token = jwtTokenUtil.generateToken(userDetails);
-//                return ResponseEntity.ok(new ApiResponse<>(200, "Authenticated", token));
-//            } else {
-//                throw new UsernameNotFoundException("invalid user request !");
-//            }
-//        } catch (DisabledException e) {
-//            throw new CustomException("User is disabled",HttpStatus.LOCKED);
-//        } catch (BadCredentialsException e) {
-//            throw new CustomException("Invalid Credentials",HttpStatus.UNAUTHORIZED);
-//        } catch (Exception e) {
-//            throw new CustomException("Invalid Credentials",HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
 
         authenticate(request.getEmail(), request.getPassword());
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+
         String otp = GenerateOtp();
         redisTemplate.opsForValue().set(OTP_PREFIX + request.getEmail(), otp, OTP_EXPIRATION, TimeUnit.SECONDS);
         //sendOtpByEmail(loginRequest.getEmail(), otp);
-        return ResponseEntity.ok(new ApiResponse<>(200, "OTP sent successfully", otp,null));
+        return ResponseEntity.ok(new ApiResponse<>(200, "OTP sent successfully"+otp, userService.getUserInfo(request.getEmail()),null));
     }
 
     @PostMapping("/otp")

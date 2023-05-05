@@ -1,69 +1,158 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+
+#components-form-demo-normal-login .login-form {
+  max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+  float: right;
+}
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+#components-form-demo-normal-login .login-form-button {
+  width: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+#components-layout-demo-custom-trigger .trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: color 0.3s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
 }
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.site-badge-count-4 .ant-badge-count {
+  margin-left: 20px;
+  color: #999;
+  background-color: #fff;
+  box-shadow: 0 0 0 1px #d9d9d9 inset;
+}
+
+.spinner-2 {
+  width: 50px;
+  height: 50px;
+  display: grid;
+}
+.spinner-2::before,
+.spinner-2::after {    
+  content:"";
+  grid-area: 1/1;
+  --c: radial-gradient(farthest-side,#25b09b 92%,#0000);
+  background: 
+    var(--c) 50%  0, 
+    var(--c) 50%  100%, 
+    var(--c) 100% 50%, 
+    var(--c) 0    50%;
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  animation: s2 1s infinite;
+}
+.spinner-2::before {
+margin:4px;
+filter:hue-rotate(45deg);
+background-size: 8px 8px;
+animation-timing-function: linear
+}
+
+@keyframes s2{ 
+100%{transform: rotate(.5turn)}
+}
+
+.spinner-3 {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+background: 
+  radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,
+  conic-gradient(#0000 30%,#ffa516);
+-webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+animation:s3 1s infinite linear;
+}
+
+@keyframes s3{ 
+100%{transform: rotate(1turn)}
+}
+
+
+.spinner-5 {
+width: 50px;
+height: 50px;
+display: grid;
+border:4px solid #0000;
+border-radius: 50%;
+border-right-color:#25b09b;
+animation: s5 1s infinite linear;
+}
+.spinner-5::before,
+.spinner-5::after {    
+content:"";
+grid-area: 1/1;
+margin:2px;
+border:inherit;
+border-radius: 50%;
+animation: s5 2s infinite;
+}
+.spinner-5::after {
+margin:8px;
+animation-duration: 3s;
+}
+
+@keyframes s5{ 
+100%{transform: rotate(1turn)}
+}
+
+.spinner-6 {
+width: 150px;
+height: 150px;
+display: grid;
+border:4px solid #0000;
+border-radius: 50%;
+border-color:#1E3A8A #0000;
+animation: s6 1s infinite linear;
+}
+.spinner-6::before,
+.spinner-6::after {    
+content:"";
+grid-area: 1/1;
+margin:2px;
+border:inherit;
+border-radius: 50%;
+}
+.spinner-6::before {
+border-color:#34D399 #0000;
+animation:inherit; 
+animation-duration: .5s;
+animation-direction: reverse;
+}
+.spinner-6::after {
+margin:8px;
+}
+
+@keyframes s6 { 
+100%{transform: rotate(1turn)}
+}
+
+
+
+* {
+box-sizing: border-box;
+}
+

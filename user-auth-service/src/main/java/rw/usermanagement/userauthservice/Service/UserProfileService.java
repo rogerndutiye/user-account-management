@@ -37,10 +37,13 @@ public class UserProfileService {
 
         UserProfile existingUserProfile = getUserProfileByUserId(userId);
         existingUserProfile.setProfilePhoto(createProfileDTO.getProfilePhoto());
+        existingUserProfile.setFirstName(createProfileDTO.getFirstName());
+        existingUserProfile.setLastName(createProfileDTO.getLastName());
         existingUserProfile.setGender(Gender.valueOf(createProfileDTO.getGender()));
         existingUserProfile.setDateOfBirth(createProfileDTO.getDateOfBirth());
         existingUserProfile.setMaritalStatus(MaritalStatus.valueOf(createProfileDTO.getMaritalStatus()));
         existingUserProfile.setNationality(createProfileDTO.getNationality());
+        existingUserProfile.setCompleted(true);
         return userProfileRepository.save(existingUserProfile);
     }
 
@@ -49,7 +52,6 @@ public class UserProfileService {
         existingUserProfile.setIdentityType(requestProfileVerificationDTO.getIdentityType());
         existingUserProfile.setIdentityNumber(requestProfileVerificationDTO.getIdentityNumber());
         existingUserProfile.setOfficialDocument(requestProfileVerificationDTO.getOfficialDocument());
-        existingUserProfile.setCompleted(true);
         UserProfile updatedUserProfile = userProfileRepository.save(existingUserProfile);
         User user = userService.findById(updatedUserProfile.getUser().getId());
         user.setStatus(AccountStatus.PENDING_VERIFICATION);

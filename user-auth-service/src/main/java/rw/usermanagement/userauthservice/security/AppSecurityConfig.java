@@ -62,7 +62,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.cors(Customizer.withDefaults())
                 .csrf().disable().authorizeRequests()
                 .antMatchers(
-                        "/api/**",
+                        "/api/auth/**",
                         "/api-docs/**",
                         "/swagger-ui/**",
                         "/swagger-resources/**",
